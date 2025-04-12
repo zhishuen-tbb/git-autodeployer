@@ -1,3 +1,4 @@
 .vs/
 __pycache__/
 [Ss]cripts/manifest.yaml
+*.zip
