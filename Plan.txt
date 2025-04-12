@@ -1,0 +1,61 @@
+Language: Python
+
+Requirements:
+	i. An executable that checks for new releases, it:
+		- checks a specific Git repo for its latest release tag
+		- compares the remote release tag to the local release tag
+		- if remote release tag > local release tag {
+			download zip file of latest update,
+			unzip,
+			replace existing folder at a specific directory
+		}
+		- else {
+			start game
+		}
+
+	ii. Simple GUI for executable
+		- A textbox to show status
+		- A progress bar to show progress
+
+	iii. An executable that allows the user to:
+		- download the second most recent release 
+		- download the latest release
+			** Treat these as mere download + replace functions, similar to how update is done (just without the checking). This is to allow user to easily deal with file corruptions.
+
+	iv. Simple GUI, LITERALLY just two buttons
+
+	v. A GUI to edit manifest file, good QOL for devs
+		- Manifest file should contain as little stuff as possible, such as:
+			1. url prefix
+			2. repo_owner_name
+			3. repo_name
+			4. url_suffix	** only need to expose repo_owner_name and repo_name in GUI, since url prefix and suffix should probably just be constants
+			5. local_version
+
+Action Plan:
+	For requirement i.:
+		1. Figure out how to make requests with Python
+		2. Function to make a request to GitHub's API for latest release's tag
+			- Parameter: string targetUrl
+			- Return: string tag
+		3. Function to parse string into ReleaseDetails object
+			- Parameter: string releaseTag
+			- Return: ReleaseDetails{ int major, int minor, int patch, string downloadLink }
+		4. Function to read a local yaml file into dictionary
+			- Parameter: string filePath
+			- Return: Dictionary<string, string>
+
+		5. Function to compare two ReleaseDetails objects
+			- Parameter: ReleaseDetails localReleaseDetails, ReleaseDetails remoteReleaseDetails
+			- Return: bool
+		5. Function to terminate self
+		6. Function to start an executable
+			- Parameter: string filePath
+			- Call function to terminate self here
+		7. Function to download a Git release asset from a URL to targetLocation
+			- Parameter: string targetUrl, string downloadPath
+		8. Function to unzip a ZIP file
+			- Parameter: string filePath
+		9. Function to move a folder to targetLocation
+			- Parameter: string fromPath, string toPath
+			- Make sure to call function to start an executable and function to terminate self after calling this function
