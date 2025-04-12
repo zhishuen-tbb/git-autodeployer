@@ -27,8 +27,10 @@ def main():
 	if (git_utils.is_remote_version_newer(remote_version_details, local_version_details)):
 		# Update required, start download latest version
 		print("Update required")
-		requests_manager.download_file_from_url(remote_version_details.asset_download_link, file_handler.current_directory, 
-										  local_manifest_dict["download_file_name"], local_manifest_dict["download_file_extension"])
+		downloaded_file_path = requests_manager.download_file_from_url(remote_version_details.asset_download_link, file_handler.current_directory, 
+																 local_manifest_dict["download_file_name"], local_manifest_dict["download_file_extension"])
+	
+		# Unzip downloaded file
 	else:
 		# Update not required, proceed to start game
 		print("Update not required")
