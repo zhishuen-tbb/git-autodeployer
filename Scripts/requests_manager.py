@@ -21,5 +21,7 @@ def download_file_from_url(url, output_path, file_name, file_extension):
 				file.write(chunk)
 
 		print("Download was successful.")
+
+		return download_path
 	else:
 		print("Download failed.")
