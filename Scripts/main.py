@@ -31,6 +31,7 @@ def main():
 																 local_manifest_dict["download_file_name"], local_manifest_dict["download_file_extension"])
 	
 		# Unzip downloaded file
+		extracted_file_path = file_handler.unzip_file(downloaded_file_path)
 	else:
 		# Update not required, proceed to start game
 		print("Update not required")
